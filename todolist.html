@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="./CSS/style.css">
     <!-- <script src="./JS/todo.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-   
+    
+
 
 </head>
 <body style="background-image: url(./Assets/images/todolistbg.png); background-repeat: no-repeat; background-size: cover;">
@@ -80,15 +81,15 @@
             for(i = 0; i < arr.length; i++) {
             if (arr[i].completed == true){
             out += '<div>';
-            out += '<label style="padding:.5em">' + '<input class="option-input radio"  type="checkbox" id="cb" onclick="todo(this)">' + '</input>'+ '</label>';
-            out += '<label style="padding:.5em">' + arr[i].title +  '</label>';
+            out += '<label style="padding:.5em">' + '<input class="option-input radio"  type="checkbox" id="cb" onclick="todo(this), ToggleColor(this);">' + '</input>'+ '</label>';
+            out += '<label name:"title" style="padding:.5em;">' + '<li style="list-style-type: none">' + arr[i].title + '</li>'+ '</label>';
            
             out += '</div>';
             }
             else{
             out += '<div>';
             out += '<label style="padding:.5em; color:red">' + '<input class="option-input radio"  type="checkbox" checked id="cb" onclick="todo(this)">' + '</input>'+ '</label>';
-            out += '<label style="padding:.5em; color:red">' +'<s>'+ arr[i].title +'</s>' + '</label>';
+            out += '<label style="padding:.5em; color:red">' + '<li style="list-style-type: none; text-decoration: line-through;">' + arr[i].title  + '</li>'+ '</label>';
             
             out += '</div>';
 
@@ -102,11 +103,12 @@
           var count = 0;
           function todo(cb){
           if (cb.checked == true) {
+          
           count++;
           if (count == 5) {
-     
-          alert("Congrats!!! 5 Tasks have been Succesfully Completed.")
           
+          alert("Congrats!!! 5 Tasks have been Succesfully Completed.")
+        
           }
           }
           else {
@@ -119,9 +121,7 @@
           }
           }
 
-  
-
- 
+        
 
 
 // Button click to remove marking

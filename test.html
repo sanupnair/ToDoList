@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    var count = $("#mySelect :selected").length;
+    $(document).ready(function(){
+        console.log($('#input1 option').size());
+        console.log($('#input1 option').length);
+     });
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+     <select data-attr="dropdown" id="input1">
+        <option value="Male" id="Male">Male</option>
+        <option value="Female" id="Female">Female</option>
+     </select>
+</body>
+</html>
