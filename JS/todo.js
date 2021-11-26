@@ -18,3 +18,11 @@ function validate(callBack) {
 validate(callBack, load);
 
 
+// Button click to remove marking
+$(document).ready(function(){
+  $("#bttn").click(function(){
+  $(".inp").prop("checked", false);
+  });
+  });
+
+  

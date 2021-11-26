@@ -11,12 +11,51 @@
     <script src="./JS/todo.js"></script>
 </head>
 <body style="background-image: url(./Assets/images/mainbg1.jpg); background-repeat: no-repeat; background-size: cover;">
+ 
+  <!-- Overlay Div -->
+  <div id="myNav" class="overlay">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <span style="font-size:30px;cursor:pointer; margin-right: 1em;"> <a href="main.html"> &#9776; Refresh To Do List</a></span> 
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="main.html">Home</a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.html">Log Out</a>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+          </nav>
+      
+        <!-- table Starts here-->
+        <h3>My To Do List</h3>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        
+        <table id='table'>
+        </table>
+        </div>
+    </section>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
     
+  </div>
+</div>
+
+
+
     <!-- Navbar Starts -->
    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="letter-spacing: .50em; color: rgb(0, 183, 255);"> To Do List <b>|</b> <small style="color: darkgoldenrod; letter-spacing: normal;"> This is the Home Page </small></a>
+      <span style="font-size:30px;cursor:pointer; margin-right: 1em;" onclick="openNav()">&#9776; Open To Do List</span> 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,9 +64,7 @@
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="main.html">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="todolist.html">To Do List</a>
-              </li>
+              
               <li class="nav-item">
                 <a class="nav-link" href="index.html">Log Out</a>
               </li>
@@ -37,16 +74,85 @@
         </div>
       </nav>
     <!-- main content -->
-
+    
    <div class="container" style="text-align: center; margin-top: 10em;">
        <h2>Welcome to the Home Page of To Do List. </h2>
-       You can access the To Do List by clicking on the menu - <b>To Do List</b>   <br><br>
+       You can access the To Do List by clicking on the menu - <b>Open To Do List</b>   <br><br>
        To Sign out simply click on the <b>"Log Out"</b>  menu
 
   </div>
      
        
-       
+  <script>
+
+    // JSON file fetching
+
+    var xmlhttp = new XMLHttpRequest();
+            var title = "https://jsonplaceholder.typicode.com/todos";
+
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            myFunction(myArr);
+            }
+            };
+            xmlhttp.open("GET", title, true);
+            xmlhttp.send();
+
+            function myFunction(arr) {
+            var out = "";
+            var i;
+            for(i = 0; i < arr.length; i++) {
+            if (arr[i].completed == true){
+           
+            out +='<div>' + '<label style="padding:.5em">' + '<ul  style="color:white;">' +  '<input class="option-input radio" style="margin-right:1em;" type="checkbox" id="cb" onclick="todo(this), checkIt(this)">'+ arr[i].title + '</ul>'+ '</input>'+ '</label>' + '</div>';
+            
+           
+           
+            }
+            else{
+            out +='<div>' + '<label style="padding:.5em; color:red">' + '<ul style="list-style-type: none; text-decoration: line-through;">' +  '<input class="option-input radio" disabled style="margin-right:1em;" checked type="checkbox" id="cb" onclick="todo(this), checkIt(this)">'+ arr[i].title + '</ul>'+ '</input>'+ '</label>' + '</div>';
+  
+          
+
+            }
+          }
+            document.getElementById("table").innerHTML = out;
+            }
+
+
+// Chekbox Count & color change + strike through 
+          var count = 0;
+          function todo(cb){
+            cb.parentNode.style.color = cb.checked ? 'red' : 'white';
+            cb.parentNode.style.textDecoration = cb.checked ? 'line-through' : '';
+          if (cb.checked == true) {
+          
+          count++;
+          if (count == 5) {
+          
+          alert("Congrats!!! 5 Tasks have been Succesfully Completed.")
+        
+          }
+          }
+          else {
+          
+          count--;
+          if (count == 5) {
+     
+          alert("Congrats!!! 5 Tasks have been Succesfully Completed.")
+          } 
+          }
+          }
+
+function openNav() {
+  document.getElementById("myNav").style.width = "100%";
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
+</script>   
 
   
     
